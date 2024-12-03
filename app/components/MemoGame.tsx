@@ -6,21 +6,26 @@ import Confetti from "./Confetti";
 
 const memoryCards = [
     { id: "arrow-image", name: "arrow", type: "image" },
-    { id: "arrow-text", name: "arrow", type: "text" },
+    {
+        id: "arrow-text",
+        name: "arrow",
+        type: "text",
+        text: "Arrow Textasdasdadsasd asd dasd asda as d. dsadasdasd",
+    },
     { id: "dova-image", name: "dova", type: "image" },
-    { id: "dova-text", name: "dova", type: "text" },
+    { id: "dova-text", name: "dova", type: "text", text: "Dova Text" },
     { id: "khajit-image", name: "khajit", type: "image" },
-    { id: "khajit-text", name: "khajit", type: "text" },
+    { id: "khajit-text", name: "khajit", type: "text", text: "Khajit Text" },
     { id: "nord-image", name: "nord", type: "image" },
-    { id: "nord-text", name: "nord", type: "text" },
+    { id: "nord-text", name: "nord", type: "text", text: "Nord Text" },
     { id: "orc-image", name: "orc", type: "image" },
-    { id: "orc-text", name: "orc", type: "text" },
+    { id: "orc-text", name: "orc", type: "text", text: "Orc Text" },
     { id: "potion-image", name: "potion", type: "image" },
-    { id: "potion-text", name: "potion", type: "text" },
+    { id: "potion-text", name: "potion", type: "text", text: "Potion Text" },
     { id: "spider-image", name: "spider", type: "image" },
-    { id: "spider-text", name: "spider", type: "text" },
+    { id: "spider-text", name: "spider", type: "text", text: "Spider Text" },
     { id: "thief-image", name: "thief", type: "image" },
-    { id: "thief-text", name: "thief", type: "text" },
+    { id: "thief-text", name: "thief", type: "text", text: "Thief Text" },
 ] as const;
 
 const generateDeck = () => {
@@ -32,6 +37,7 @@ const generateDeck = () => {
     }
     return deck;
 };
+
 export default function MemoGame() {
     const [cards, setCards] = useState(() => generateDeck());
     const [flipped, setFlipped] = useState<number[]>([]);
@@ -121,13 +127,14 @@ export default function MemoGame() {
 }
 
 interface CardProps {
-    card: { name: string; type: "image" | "text"; id: string };
+    card: { name: string; type: "image" | "text"; id: string; text?: string };
     flipped: boolean;
     solved: boolean;
     onClick: () => void;
 }
 
 function Card({ card, flipped, solved, onClick }: CardProps) {
+    console.log(card.type === "text" ? card.text : "Card is not text.");
     return (
         <div
             className={`relative w-[20vw] h-[20vw] max-w-[100px] max-h-[100px] cursor-pointer bg-slate-200 
@@ -152,7 +159,7 @@ function Card({ card, flipped, solved, onClick }: CardProps) {
                         flipped || solved ? "visible" : "hidden"
                     }`}
                 >
-                    {card.name}
+                    {card.text}
                 </span>
             )}
             {!flipped && !solved ? (
