@@ -157,7 +157,12 @@ function Card({ card, flipped, solved, onClick }: CardProps) {
                 <span
                     className={`text-center ${
                         flipped || solved ? "visible" : "hidden"
-                    }`}
+                    } text-wrap overflow-hidden text-ellipsis`}
+                    style={{
+                        maxWidth: "90%", // Ensures the text fits inside the card
+                        wordWrap: "break-word", // Prevents long words from overflowing
+                        textOverflow: "ellipsis", // Adds ellipsis when text overflows
+                    }}
                 >
                     {card.text}
                 </span>
