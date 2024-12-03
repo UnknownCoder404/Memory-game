@@ -13,8 +13,8 @@ This project is a simple memory card game implemented using Next.js. The game is
 - **Winning Screen:** Celebrate your victory with a winning screen displaying confetti.
 
 # Show Your Support 🌟
-If you find this project interesting or useful, consider giving it a star on GitHub. It's a simple way to show your support and helps others discover the project.
 
+If you find this project interesting or useful, consider giving it a star on GitHub. It's a simple way to show your support and helps others discover the project.
 
 # Installation:
 
@@ -23,5 +23,7 @@ npm install
 
 2- Run the development server:
 npm run dev
+
 # Contributions
+
 Feel free to contribute to the project by opening issues or submitting pull requests. Your feedback and contributions are highly appreciated.
