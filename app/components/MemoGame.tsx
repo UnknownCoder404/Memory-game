@@ -17,20 +17,18 @@ const memoryCards = [
         type: "text",
         text: "se rizik srčanog udara smanjiti.",
     },
-    { id: "dova-image", name: "dova", type: "image" },
-    { id: "dova-text", name: "dova", type: "text", text: "Dova Text" },
-    { id: "khajit-image", name: "khajit", type: "image" },
-    { id: "khajit-text", name: "khajit", type: "text", text: "Khajit Text" },
-    { id: "nord-image", name: "nord", type: "image" },
-    { id: "nord-text", name: "nord", type: "text", text: "Nord Text" },
-    { id: "orc-image", name: "orc", type: "image" },
-    { id: "orc-text", name: "orc", type: "text", text: "Orc Text" },
-    { id: "potion-image", name: "potion", type: "image" },
-    { id: "potion-text", name: "potion", type: "text", text: "Potion Text" },
-    { id: "spider-image", name: "spider", type: "image" },
-    { id: "spider-text", name: "spider", type: "text", text: "Spider Text" },
-    { id: "thief-image", name: "thief", type: "image" },
-    { id: "thief-text", name: "thief", type: "text", text: "Thief Text" },
+    {
+        id: "5-years-without-cigarettes",
+        name: "5-years-without-cigarettes",
+        type: "text",
+        text: "5 godina bez cigareta = 70% manji rizik od srčanih bolesti",
+    },
+    {
+        id: "5-years-without-cigarettes",
+        name: "5-years-without-cigarettes",
+        type: "image",
+        imageExtension: "png",
+    },
 ] as const;
 
 const generateDeck = () => {
@@ -129,7 +127,19 @@ export default function MemoGame() {
 }
 
 interface CardProps {
-    card: { name: string; type: "image" | "text"; id: string; text?: string };
+    card:
+        | {
+              name: string;
+              type: "text";
+              id: string;
+              text: string;
+          }
+        | {
+              name: string;
+              type: "image";
+              id: string;
+              imageExtension: string;
+          };
     flipped: boolean;
     solved: boolean;
     onClick: () => void;
@@ -146,8 +156,8 @@ function Card({ card, flipped, solved, onClick }: CardProps) {
         >
             {card.type === "image" ? (
                 <Image
-                    src={`/memo-cards/${card.name}.webp`}
-                    alt={`Card ${card.name}`}
+                    src={`/memo-cards/${card.name}.${card.imageExtension}`}
+                    alt={`${card.name}`}
                     fill
                     priority
                     style={{
