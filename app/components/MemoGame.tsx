@@ -5,12 +5,17 @@ import Image from "next/image";
 import Confetti from "./Confetti";
 
 const memoryCards = [
-    { id: "arrow-image", name: "arrow", type: "image" },
     {
-        id: "arrow-text",
-        name: "arrow",
+        id: "24-h",
+        name: "24-h",
         type: "text",
-        text: "Arrow Textasdasdadsasd asd dasd asda as d. dsadasdasd",
+        text: "24 sati nakon pušenja će",
+    },
+    {
+        id: "24-h",
+        name: "24-h",
+        type: "text",
+        text: "se rizik srčanog udara smanjiti.",
     },
     { id: "dova-image", name: "dova", type: "image" },
     { id: "dova-text", name: "dova", type: "text", text: "Dova Text" },
@@ -49,10 +54,7 @@ export default function MemoGame() {
             setDisableAll(true); // Temporarily disable interactions
             const [firstIndex, secondIndex] = flipped;
 
-            if (
-                cards[firstIndex].name === cards[secondIndex].name && // Matching names
-                cards[firstIndex].type !== cards[secondIndex].type // Different types
-            ) {
+            if (cards[firstIndex].name === cards[secondIndex].name) {
                 // Cards match
                 setTimeout(() => {
                     setSolved((prev) => [...prev, firstIndex, secondIndex]);
