@@ -97,7 +97,7 @@ export default function MemoGame() {
                 {gameOver && (
                     <>
                         <h1 className="mt-3 text-3xl text-[#f4f4f4]">
-                            You Won!!
+                            Pobijedio si!!
                         </h1>
                         <Confetti />
                     </>
@@ -118,7 +118,7 @@ export default function MemoGame() {
                         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
                         onClick={resetGame}
                     >
-                        Reset Game
+                        Ponovi igru
                     </button>
                 )}
             </div>
