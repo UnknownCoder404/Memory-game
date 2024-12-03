@@ -13,10 +13,14 @@ const memoryCards = [
     "potion",
     "spider",
     "thief",
-];
+] as const;
 
 const generateDeck = () => {
-    const deck = [...memoryCards, ...memoryCards];
+    const deck = memoryCards.flatMap((card) => [
+        { name: card, id: `${card}-1` }, // Unique ID for the first card
+        { name: card, id: `${card}-2` }, // Unique ID for the pair
+    ]);
+    // Shuffle the deck
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -25,27 +29,39 @@ const generateDeck = () => {
 };
 
 export default function MemoGame() {
-    const [cards, setCards] = useState(generateDeck());
+    const [cards, setCards] = useState(() => generateDeck());
     const [flipped, setFlipped] = useState<number[]>([]);
     const [solved, setSolved] = useState<number[]>([]);
+    const [disableAll, setDisableAll] = useState(false);
 
     useEffect(() => {
         if (flipped.length === 2) {
-            const [first, second] = flipped;
-            setTimeout(() => {
-                if (cards[first] === cards[second]) {
-                    setSolved((prev) => [...prev, first, second]);
-                }
-                setFlipped([]);
-            }, 1000);
+            setDisableAll(true); // Temporarily disable interactions
+            const [firstIndex, secondIndex] = flipped;
+
+            if (cards[firstIndex].name === cards[secondIndex].name) {
+                // Cards match
+                setTimeout(() => {
+                    setSolved((prev) => [...prev, firstIndex, secondIndex]);
+                    setFlipped([]);
+                    setDisableAll(false); // Re-enable interactions
+                }, 1000);
+            } else {
+                // Cards don't match
+                setTimeout(() => {
+                    setFlipped([]);
+                    setDisableAll(false); // Re-enable interactions
+                }, 1000);
+            }
         }
-    }, [flipped]);
+    }, [flipped, cards]);
 
     const handleClick = (index: number) => {
         if (isFlippableCard(index)) setFlipped((prev) => [...prev, index]);
     };
 
     const isFlippableCard = (index: number) =>
+        !disableAll &&
         !flipped.includes(index) &&
         flipped.length < 2 &&
         !solved.includes(index);
@@ -54,6 +70,7 @@ export default function MemoGame() {
         setCards(generateDeck());
         setFlipped([]);
         setSolved([]);
+        setDisableAll(false);
     };
 
     const gameOver = solved.length === cards.length;
@@ -75,7 +92,7 @@ export default function MemoGame() {
                 <div className="grid grid-cols-4 gap-5 mt-6">
                     {cards.map((card, index) => (
                         <Card
-                            key={index}
+                            key={card.id}
                             card={card}
                             flipped={flipped.includes(index)}
                             solved={solved.includes(index)}
@@ -83,13 +100,21 @@ export default function MemoGame() {
                         />
                     ))}
                 </div>
+                {gameOver && (
+                    <button
+                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                        onClick={resetGame}
+                    >
+                        Reset Game
+                    </button>
+                )}
             </div>
         </div>
     );
 }
 
 interface CardProps {
-    card: string;
+    card: { name: string; id: string };
     flipped: boolean;
     solved: boolean;
     onClick: () => void;
@@ -106,8 +131,8 @@ function Card({ card, flipped, solved, onClick }: CardProps) {
         >
             <Image
                 className="rotate-180"
-                src={`/memo-cards/${card}.webp`}
-                alt={`Card ${card}`}
+                src={`/memo-cards/${card.name}.webp`}
+                alt={`Card ${card.name}`}
                 fill
                 priority
                 style={{
