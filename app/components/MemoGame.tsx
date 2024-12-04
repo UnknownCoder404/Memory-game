@@ -6,28 +6,100 @@ import Confetti from "./Confetti";
 
 const memoryCards = [
     {
-        id: "24-h",
-        name: "24-h",
-        type: "text",
-        text: "24 sati nakon pušenja će",
-    },
-    {
-        id: "24-h",
-        name: "24-h",
-        type: "text",
-        text: "se rizik srčanog udara smanjiti.",
-    },
-    {
-        id: "5-years-without-cigarettes",
-        name: "5-years-without-cigarettes",
-        type: "text",
-        text: "5 godina bez cigareta = 70% manji rizik od srčanih bolesti",
-    },
-    {
-        id: "5-years-without-cigarettes",
-        name: "5-years-without-cigarettes",
+        name: "Cigarette with X",
         type: "image",
+        id: "cigarrete_with_x",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Cigarette with X",
+        type: "text",
+        id: "cigarette_with_x_text",
+        text: "Pušenje uzrokuje rak pluća.",
+    },
+    {
+        name: "Heart Symbol",
+        type: "image",
+        id: "heart",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Heart Symbol",
+        type: "text",
+        id: "heart_symbol_text",
+        text: "Nakon 20 minuta prestanka, srčani ritam se normalizira.",
+    },
+    {
+        name: "Poison Bottle",
+        type: "image",
+        id: "poison_bottle",
+        imageExtension: "webp",
+    },
+    {
+        name: "Poison Bottle",
+        type: "text",
+        id: "poison_bottle_text",
+        text: "Cigarete sadrže više od 70 kancerogenih tvari.",
+    },
+    {
+        name: "Healthy Lungs",
+        type: "image",
+        id: "healthy_lungs",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Healthy Lungs",
+        type: "text",
+        id: "healthy_lungs_text",
+        text: "Nakon 3 mjeseca, funkcija pluća se značajno poboljšava.",
+    },
+    {
+        name: "Wallet",
+        type: "image",
+        id: "wallet",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Wallet",
+        type: "text",
+        id: "wallet_text",
+        text: "Prestankom pušenja možete godišnje uštedjeti tisuće kuna.",
+    },
+    {
+        name: "Family Support",
+        type: "image",
+        id: "family",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Family Support",
+        type: "text",
+        id: "family_support_text",
+        text: "Podrška bližnjih ključna je za uspješan prestanak.",
+    },
+    {
+        name: "Diseased Lungs",
+        type: "image",
+        id: "diseased_lungs",
+        imageExtension: "jpg",
+    },
+    {
+        name: "Diseased Lungs",
+        type: "text",
+        id: "diseased_lungs_text",
+        text: "Pušenje povećava rizik od KOPB-a i drugih plućnih bolesti.",
+    },
+    {
+        name: "App Icon",
+        type: "image",
+        id: "app_icon",
         imageExtension: "png",
+    },
+    {
+        name: "App Icon",
+        type: "text",
+        id: "app_icon_text",
+        text: "Korištenje aplikacija može pomoći u praćenju napretka.",
     },
 ] as const;
 
@@ -200,13 +272,13 @@ function Card({ card, flipped, solved, onClick }: CardProps) {
                 `}
             >
                 {card.type === "image" ? (
-                    <Image
-                        src={`/memo-cards/${card.name}.${card.imageExtension}`}
+                    <img
+                        src={`/${card.id}.${card.imageExtension}`}
                         alt={`${card.name}`}
-                        fill
-                        priority
-                        className="object-contain p-2"
-                        suppressHydrationWarning
+                        // fill
+                        // priority
+                        // className="object-contain p-2"
+                        // suppressHydrationWarning
                     />
                 ) : (
                     <div
