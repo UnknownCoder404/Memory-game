@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Confetti from "./Confetti";
+import { Card } from "./Card";
 
 const memoryCards = [
     {
@@ -63,7 +62,7 @@ const memoryCards = [
         name: "Wallet",
         type: "text",
         id: "wallet_text",
-        text: "Prestankom pušenja možete godišnje uštedjeti tisuće kuna.",
+        text: "Prestankom pušenja možete godišnje uštedjeti stotine eura.",
     },
     {
         name: "Family Support",
@@ -171,10 +170,9 @@ export default function MemoGame() {
                         <h1 className="mt-3 text-3xl text-[#f4f4f4]">
                             Pobijedio si!!
                         </h1>
-                        <Confetti />
                     </>
                 )}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 mt-6">
+                <div className="grid grid-cols-2 min-[325px]:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-5 mt-6">
                     {cards.map((card, index) => (
                         <Card
                             key={index}
@@ -197,120 +195,3 @@ export default function MemoGame() {
         </div>
     );
 }
-
-interface CardProps {
-    card:
-        | {
-              name: string;
-              type: "text";
-              id: string;
-              text: string;
-          }
-        | {
-              name: string;
-              type: "image";
-              id: string;
-              imageExtension: string;
-          };
-    flipped: boolean;
-    solved: boolean;
-    onClick: () => void;
-}
-function Card({ card, flipped, solved, onClick }: CardProps) {
-    return (
-        <div
-            className={`
-                relative 
-                w-24 h-24 
-                sm:w-32 sm:h-32 
-                md:w-40 md:h-40 
-                cursor-pointer 
-                bg-white 
-                rounded-lg 
-                shadow-md 
-                flex 
-                justify-center 
-                items-center 
-                transition-all 
-                duration-300 
-                transform 
-                hover:scale-105 
-                ${flipped && !solved ? "rotate-y-180" : ""}
-                ${solved ? "opacity-50 cursor-default" : ""}
-            `}
-            onClick={!solved ? onClick : undefined}
-        >
-            {/* Card Back (Default State) */}
-            <div
-                className={`
-                    absolute 
-                    inset-0 
-                    bg-gradient-to-br 
-                    from-blue-500 
-                    to-purple-600 
-                    rounded-lg 
-                    flex 
-                    justify-center 
-                    items-center 
-                    ${flipped || solved ? "hidden" : ""}
-                `}
-            >
-                <span className="text-4xl font-bold text-white">?</span>
-            </div>
-
-            {/* Card Front (Flipped/Solved State) */}
-            <div
-                className={`
-                    absolute 
-                    inset-0 
-                    flex 
-                    justify-center 
-                    items-center 
-                    p-2 
-                    ${!(flipped || solved) ? "hidden" : ""}
-                    ${flipped && !solved ? "rotate-y-180" : ""}
-                `}
-            >
-                {card.type === "image" ? (
-                    <img
-                        src={`/${card.id}.${card.imageExtension}`}
-                        alt={`${card.name}`}
-                        // fill
-                        // priority
-                        // className="object-contain p-2"
-                        // suppressHydrationWarning
-                    />
-                ) : (
-                    <div
-                        className={`
-                            text-center 
-                            text-sm 
-                            sm:text-base 
-                            md:text-lg 
-                            font-semibold 
-                            text-gray-800 
-                            line-clamp-3
-                            break-words
-                        `}
-                    >
-                        {card.text}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-}
-
-// You'll need to add some custom CSS for the rotate effect
-// Add this to your global CSS file or create a new one
-const customCardStyles = `
-@keyframes rotateY {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(180deg); }
-}
-
-.rotate-y-180 {
-    animation: rotateY 0.5s linear;
-    transform: rotateY(180deg);
-}
-`;

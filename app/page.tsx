@@ -7,6 +7,8 @@ export const metadata: Metadata = {
         "Memory igra za Project Oxygen dizajnirana na temu prevencija pušenja",
 };
 
-export default function Home() {
+export const dynamic = "error";
+
+export default async function Home() {
     return <MemoGame />;
 }
