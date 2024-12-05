@@ -15,7 +15,7 @@ const normalizeSize = (size: CSSProperties["width"]) =>
 export type SpinnersProps = Partial<typeof defaultProps>;
 
 export const withSharedProps = <P extends SpinnerProps>(
-    Component: ComponentType<P>
+    Component: ComponentType<P>,
 ) => {
     function Wrapper(props: SpinnersProps & P) {
         const {
