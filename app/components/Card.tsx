@@ -19,20 +19,6 @@ interface CardProps {
     onClick: () => void;
 }
 
-// You'll need to add some custom CSS for the rotate effect
-// Add this to your global CSS file or create a new one
-const customCardStyles = `
-@keyframes rotateY {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(180deg); }
-}
-
-.rotate-y-180 {
-    animation: rotateY 0.5s linear;
-    transform: rotateY(180deg);
-}
-`;
-
 export function Card({ card, flipped, solved, onClick }: CardProps) {
     return (
         <div
@@ -96,6 +82,7 @@ export function Card({ card, flipped, solved, onClick }: CardProps) {
                             alt={`${card.name}`}
                             fill
                             priority
+                            className="rounded-lg"
                         />
                     </div>
                 ) : (
