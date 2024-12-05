@@ -95,6 +95,7 @@ export function Card({ card, flipped, solved, onClick }: CardProps) {
                             font-semibold 
                             text-gray-800 
                             break-words
+                            overflow-hidden
                         `}
                     >
                         {card.text}

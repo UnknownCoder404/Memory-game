@@ -62,7 +62,7 @@ const memoryCards = [
         name: "Wallet",
         type: "text",
         id: "wallet_text",
-        text: "Prestankom pušenja možete godišnje uštedjeti stotine eura.",
+        text: "Prestankom pušenja ušteđujete stotine eura godišnje.",
     },
     {
         name: "Family Support",
