@@ -160,9 +160,9 @@ export default function MemoGame() {
     const gameOver = solved.length === cards.length;
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+        <div className="flex items-center justify-center min-h-screen bg-gray-900 p-2">
             <div className="text-center">
-                <h1 className="text-2xl font-bold text-[#f4f4f4]">
+                <h1 className="text-3xl font-bold text-[#f4f4f4]">
                     Breathe life, not smoke!
                 </h1>
                 {gameOver && (
