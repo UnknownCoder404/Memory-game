@@ -38,6 +38,7 @@ export function Card({ card, flipped, solved, onClick }: CardProps) {
                 duration-300 
                 transform 
                 hover:scale-105 
+                select-none
                 ${flipped && !solved ? "rotate-y-180" : ""}
                 ${solved ? "opacity-50 cursor-default" : ""}
             `}
@@ -96,6 +97,7 @@ export function Card({ card, flipped, solved, onClick }: CardProps) {
                             text-gray-800 
                             break-words
                             overflow-hidden
+                            select-all
                         `}
                     >
                         {card.text}
